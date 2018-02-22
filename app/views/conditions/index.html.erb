@@ -12,29 +12,41 @@
     <% end %>
 
   </div>
+<!--4ce6f502d38ddae567bf1702b05e168c | Cohen's API key-->
+
+  <% if params["address"] != "" %>
+    <% city = params["address"] %>
+  <% else %>
+    <% city = "Chicago" %>
+
+  <% end %>
 
   <% api_key = '4ce6f502d38ddae567bf1702b05e168c' %>
-  <% weather_json = open("https://api.openweathermap.org/data/2.5/weather?q=Chicago&appid=#{api_key}").read %>
+  <% weather_json = open("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{api_key}&units=imperial").read %>
   <% weather_data = JSON.parse(weather_json) %>
 
   <div class="col-sm-4">
     <table class="table table-striped table-bordered m-3">
         <tbody>
           <tr>
+            <td>City:</td>
+            <td><%= city %></td>
+          </tr>
+          <tr>
             <td>Right Now:</td>
-            <td>Rain</td>
+            <td><%= weather_data["weather"][0]["main"] %></td>
           </tr>
           <tr>
             <td>Current Temperature:</td>
-            <td>31 degrees</td>
+            <td><%= weather_data["main"]["temp"] %> F</td>
           </tr>
           <tr>
             <td>Wind:</td>
-            <td>8 mph</td>
+            <td><%= weather_data["wind"]["speed"] %> mph </td>
           </tr>
           <tr>
             <td>Humidity:</td>
-            <td>63%</td>
+            <td><%= weather_data["main"]["humidity"] %> %</td>
           </tr>
         </tbody>
     </table>
