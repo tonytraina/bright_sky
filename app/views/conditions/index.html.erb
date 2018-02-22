@@ -14,15 +14,16 @@
   </div>
 <!--4ce6f502d38ddae567bf1702b05e168c | Cohen's API key-->
 
-  <% if params["address"] != "" %>
+
+  <% if params["address"] =! "" %>
     <% city = params["address"] %>
   <% else %>
     <% city = "Chicago" %>
-
   <% end %>
 
   <% api_key = '4ce6f502d38ddae567bf1702b05e168c' %>
-  <% weather_json = open("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{api_key}&units=imperial").read %>
+  <% weather_json = open("https://api.openweathermap.org/data/2.5/weather?q=#{city}&APPID=#{api_key}&units=imperial").read %>
+
   <% weather_data = JSON.parse(weather_json) %>
 
   <div class="col-sm-4">
